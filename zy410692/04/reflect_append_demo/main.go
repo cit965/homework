@@ -5,6 +5,20 @@ import (
 	"reflect"
 )
 
+type Student struct{}
+
+var stu Student
+var n int
+
+func reflectTest(i interface{}) {
+	ReVal := reflect.ValueOf(i)
+	iVal := ReVal.Interface()
+	//断言,如果不是此类型会panic
+	v := iVal.(Student)
+
+	fmt.Println(v)
+}
+
 // reflect append方法使用 主要是将元素添加到切片里面
 func main() {
 
@@ -19,4 +33,8 @@ func main() {
 	fmt.Println("Slice:", a)
 	b = reflect.Append(b, reflect.ValueOf(80))
 	fmt.Println("Slice after appending data", b)
+
+	stu := Student{}
+	reflectTest(stu)
+
 }
